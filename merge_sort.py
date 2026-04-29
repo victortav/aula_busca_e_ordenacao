@@ -1,40 +1,40 @@
 import random
 
 
-def merge(esq, dir):
+def merge(esq, direita):
     resultado = []
     i = j = 0
-    while i < len(esq) and j < len(dir):
-        if esq[i] <= dir[j]:
+    while i < len(esq) and j < len(direita):
+        if esq[i] <= direita[j]:
             resultado.append(esq[i])
             i += 1
         else:
-            resultado.append(dir[j])
+            resultado.append(direita[j])
             j += 1
     resultado.extend(esq[i:])
-    resultado.extend(dir[j:])
+    resultado.extend(direita[j:])
     return resultado
 
 
-def merge_sort(lista):
-    if len(lista) <= 1:
-        return lista
-    meio = len(lista) // 2
-    esq = merge_sort(lista[:meio])
-    direita = merge_sort(lista[meio:])
+def merge_sort(nums):
+    if len(nums) <= 1:
+        return nums
+    meio = len(nums) // 2
+    esq = merge_sort(nums[:meio])
+    direita = merge_sort(nums[meio:])
     return merge(esq, direita)
 
 
-def merge_sort_comentada(lista, nivel=0):
+def merge_sort_comentada(nums, nivel=0):
     prefixo = "  " * nivel
-    print(f"{prefixo}Recebida: {lista}")
-    if len(lista) <= 1:
-        print(f"{prefixo}Retornando: {lista}")
-        return lista
-    meio = len(lista) // 2
-    print(f"{prefixo}Dividindo em {lista[:meio]} e {lista[meio:]}")
-    esq = merge_sort_comentada(lista[:meio], nivel + 1)
-    direita = merge_sort_comentada(lista[meio:], nivel + 1)
+    print(f"{prefixo}Recebida: {nums}")
+    if len(nums) <= 1:
+        print(f"{prefixo}Retornando: {nums}")
+        return nums
+    meio = len(nums) // 2
+    print(f"{prefixo}Dividindo em {nums[:meio]} e {nums[meio:]}")
+    esq = merge_sort_comentada(nums[:meio], nivel + 1)
+    direita = merge_sort_comentada(nums[meio:], nivel + 1)
     resultado = merge(esq, direita)
     print(f"{prefixo}Merge de {esq} + {direita} -> {resultado}")
     return resultado
